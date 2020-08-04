@@ -1,21 +1,46 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import 'react-native-gesture-handler'
+import * as React from 'react'
+import { NavigationContainer } from '@react-navigation/native'
+import { createStackNavigator } from '@react-navigation/stack'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
 
-export default function App() {
+
+import PaginaLogin from './src/pages/paginaLogin'
+import PaginaEsqueceuSenha from './src/pages/paginaEsqueceuSenha'
+import PaginaRedefinirSenha from './src/pages/paginaRedefinirSenha'
+import PaginaScanner from './src/pages/paginaScanner'
+import PaginaManutencao from './src/pages/paginaManutencao'
+
+const Stack = createStackNavigator()
+
+
+function App() {
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="PaginaLogin" screenOptions={{ headerShown: false, transitionSpec: { open: config, close: config } }} >
+        <Stack.Screen name="PaginaLogin" component={PaginaLogin} />
+        <Stack.Screen name="PaginaEsqueceuSenha" component={PaginaEsqueceuSenha} />
+        <Stack.Screen name="PaginaRedefinirSenha" component={PaginaRedefinirSenha} />
+        <Stack.Screen name="PaginaScanner" component={PaginaScanner} />
+        <Stack.Screen name="PaginaManutencao" component={PaginaManutencao} />
+      </Stack.Navigator>
+    </NavigationContainer>
+
+  )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+const config = {
+  animation: 'spring',
+  config: {
+    stiffness: 300,
+    damping: 500,
+    mass: 3,
+    overshootClamping: true,
+    restDisplacementThreshold: 0.01,
+    restSpeedThreshold: 0.01,
   },
-});
+};
+export default App;
