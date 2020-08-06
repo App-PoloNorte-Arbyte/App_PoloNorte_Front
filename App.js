@@ -20,7 +20,7 @@ function App() {
   return (
 
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="PaginaLogin" screenOptions={{ headerShown: false, transitionSpec: { open: config, close: config } }} >
+      <Stack.Navigator initialRouteName="PaginaEsqueceuSenha" screenOptions={{ headerShown: false, transitionSpec: { open: config, close: config } }} >
         <Stack.Screen name="PaginaLogin" component={PaginaLogin} />
         <Stack.Screen name="PaginaEsqueceuSenha" component={PaginaEsqueceuSenha} />
         <Stack.Screen name="PaginaRedefinirSenha" component={PaginaRedefinirSenha} />
