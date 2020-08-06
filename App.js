@@ -7,10 +7,10 @@ import { Provider } from 'react-redux'
 
 
 import PaginaLogin from './src/pages/paginaLogin'
-import PaginaEsqueceuSenha from './src/pages/paginaEsqueceuSenha'
-import PaginaRedefinirSenha from './src/pages/paginaRedefinirSenha'
+import PageForgotPassword from './src/pages/PageForgotPassword'
+import PageChangePassword from './src/pages/PageChangePassword'
 import PaginaScanner from './src/pages/paginaScanner'
-import PaginaManutencao from './src/pages/paginaManutencao'
+import PageMaintenance from './src/pages/PageMaintenance'
 
 const Stack = createStackNavigator()
 
@@ -20,15 +20,14 @@ function App() {
   return (
 
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="PaginaEsqueceuSenha" screenOptions={{ headerShown: false, transitionSpec: { open: config, close: config } }} >
+      <Stack.Navigator initialRouteName="PageChangePassword" screenOptions={{ headerShown: false, transitionSpec: { open: config, close: config } }} >
         <Stack.Screen name="PaginaLogin" component={PaginaLogin} />
-        <Stack.Screen name="PaginaEsqueceuSenha" component={PaginaEsqueceuSenha} />
-        <Stack.Screen name="PaginaRedefinirSenha" component={PaginaRedefinirSenha} />
+        <Stack.Screen name="PageForgotPassword" component={PageForgotPassword} />
+        <Stack.Screen name="PageChangePassword" component={PageChangePassword} />
         <Stack.Screen name="PaginaScanner" component={PaginaScanner} />
-        <Stack.Screen name="PaginaManutencao" component={PaginaManutencao} />
+        <Stack.Screen name="PageMaintenance" component={PageMaintenance} />
       </Stack.Navigator>
     </NavigationContainer>
-
   )
 }
 

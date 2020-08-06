@@ -2,46 +2,45 @@ import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#001435',
         flex: 1,
-        paddingVertical: 30
+        backgroundColor: '#001435',
+        paddingTop: 55
     },
-    viewLogo: {
-        alignItems: 'center'
-    },
-    logo: {
-        height: 121,
-        width: 220
-    },
-    viewTop: {
-        justifyContent: 'center',
-        paddingTop: 10
-    },
-    textnewPassword: {
-        color: '#FFFFFF',
-        textAlign: 'center',
-        fontSize: 20
-    },
-    textInputCPF: {
-        height: 30,
-        width: '60%',
-        borderColor: 'white',
-        borderWidth: 2,
+    boxModel: {
+        height: '27%',
         backgroundColor: '#EAEAEA',
-        marginVertical: 17,
-        textAlign: 'center',
-        alignSelf: 'center',
+        marginHorizontal: 30
+    },
+    textBoxModel: {
+        fontSize: 25,
+        marginLeft: 8,
+        paddingVertical: 5,
+    },
+    viewCenter: {
+        backgroundColor: '#001435',
+        height: '8%'
+    },
+    boxMaintenance: {
+        height: '25%',
+        backgroundColor: '#EAEAEA',
+        marginHorizontal: 30,
+    },
+    textDescription: {
+        textAlign: 'left',
+        marginHorizontal: 5,
+        fontSize: 20
     },
     viewButton: {
         flex: 1,
-        justifyContent: 'center',
+        justifyContent: 'space-evenly',
     },
     buttonStyle: {
         width: '60%',
         backgroundColor: '#FFFFFF',
         alignSelf: 'center',
-        height: 30,
+        height: 40,
         justifyContent: 'center',
+        paddingHorizontal: 5,
         shadowOffset: {
             width: 0,
             height: 6,
@@ -58,4 +57,3 @@ const styles = StyleSheet.create({
 })
 
 export default styles
-

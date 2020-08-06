@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
         width: 220
     },
     viewTop: {
-        justifyContent: 'center',
+        justifyContent:'center',
         paddingTop: 10
     },
     textnewPassword: {
