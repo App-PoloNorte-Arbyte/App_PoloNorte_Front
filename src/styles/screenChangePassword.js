@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 20
     },
-    textInputCPF: {
+    textInput: {
         height: 30,
         width: '60%',
         borderColor: 'white',

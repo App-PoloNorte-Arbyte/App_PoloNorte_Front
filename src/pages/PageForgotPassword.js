@@ -12,7 +12,7 @@ const PageForgotPassword = () => {
             <View style={styles.viewTop}>
                 <Text style={styles.textnewPassword}>Criar nova senha</Text>
                 <TextInput
-                    style={styles.textInputCPF}
+                    style={styles.textInput}
                     placeholder='CPF'
                     placeholderTextColor='#C4C4C4'
                 />

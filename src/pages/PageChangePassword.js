@@ -12,17 +12,17 @@ const PageChangePassword = () => {
             <View style={styles.viewTop}>
                 <Text style={styles.textnewPassword}>Redefinir a Senha</Text>
                 <TextInput
-                    style={styles.textInputCPF}
+                    style={styles.textInput}
                     placeholder='Senha Atual'
                     placeholderTextColor='#C4C4C4'
                 />
                 <TextInput
-                    style={styles.textInputCPF}
+                    style={styles.textInput}
                     placeholder='Nova Senha'
                     placeholderTextColor='#C4C4C4'
                 />
                 <TextInput
-                    style={styles.textInputCPF}
+                    style={styles.textInput}
                     placeholder='Confirmar Nova Senha'
                     placeholderTextColor='#C4C4C4'
                 />
