@@ -1,14 +1,16 @@
 import React, { useState } from 'react'
 import { TextInput, StyleSheet } from 'react-native'
 
-const Input = ({ placeholder, onChangeText, value }) => {
+const Input = ({ placeholder, onChangeText, value, secureText }) => {
   return (
     <TextInput
       style={styles.textInput}
       placeholder={placeholder}
       onChangeText={onChangeText}
       value={value}
-      placeholderTextColor='#C4C4C4'
+      placeholderTextColor='#001445'
+      secureTextEntry={secureText}
+      keyboardType={'default'}
     />
   );
 };

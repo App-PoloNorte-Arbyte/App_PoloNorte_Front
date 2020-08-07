@@ -1,12 +1,42 @@
 import 'react-native-gesture-handler'
 import React, { useState } from 'react'
-import { Text, View, StatusBar, Image, TextInput } from 'react-native'
+import { Text, View, StatusBar, Image, Alert, AsyncStorage } from 'react-native'
+
+import callLogin from '../Api/callLogin'
 import logo from '../images/logo.png'
 import styles from '../styles/screenLogin'
 import Button from '../components/Button'
 import Input from '../components/Input'
 
-const ScreenLogin = () => {
+
+const ScreenLogin = ({ navigation }) => {
+    const [cpf, setCpf] = useState('')
+    const [password, setPassword] = useState('')
+    const isFormValid = () => cpf != '' && password != '';
+    const resetInput = () => { setCpf(''), setPassword('') }
+
+    const onPressLogin = () => {
+        if (!isFormValid()) {
+            return Alert.alert("Preencha os campos obrigatórios")
+        }
+        callLogin(cpf, password)
+            .then((response) => {
+                return AsyncStorage.setItem('user', JSON.stringify(response.data))
+            })
+            .then(() => {
+                resetInput()
+                navigation.navigate('PaginaScanner')
+            })
+            .catch(e => {
+                resetInput()
+                Alert.alert('Não autorizado')
+                console.log(e.response.data)
+            });
+    };
+
+    const onPressForgot = () => { 
+        navigation.navigate('ScreenForgot')
+    }
     return (
         <View style={styles.container}>
             <View style={{ flex: 1 }}>
@@ -18,13 +48,13 @@ const ScreenLogin = () => {
                 <View>
                 </View>
                 <View style={styles.containerLogin}>
-                    <Input placeholder="CPF" />
-                    <Input placeholder="Senha" />
+                    <Input placeholder="CPF" value={cpf} onChangeText={setCpf} />
+                    <Input placeholder="Senha" value={password} onChangeText={setPassword} secureText={true} />
                     <View style={{ marginTop: 5 }}>
-                        <Button onPress={() => { }} title="Entrar" />
+                        <Button onPress={onPressLogin} title="Entrar" />
                     </View>
                     <View style={styles.containerForgotPassword}>
-                        <Button onPress={() => { }} title="Esqueci a senha" style={styles.textForgotPassword} />
+                        <Button onPress={onPressForgot} title="Esqueci a senha" style={styles.textForgotPassword} />
                     </View>
                 </View>
             </View>
