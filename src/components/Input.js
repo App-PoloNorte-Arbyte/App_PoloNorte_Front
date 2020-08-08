@@ -29,7 +29,6 @@ const styles = StyleSheet.create({
   viewButton: {
     flex: 1,
     justifyContent: 'center',
-    // marginVertical: 200
-  },
+  }
 });
 export default Input;
