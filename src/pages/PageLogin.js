@@ -5,11 +5,12 @@ import { Text, View, StatusBar, Image, Alert, AsyncStorage } from 'react-native'
 import callLogin from '../Api/callLogin'
 import logo from '../images/logo.png'
 import styles from '../styles/screenLogin'
-import Button from '../components/Button'
+import SolidButton from '../components/SolidButton'
+import ClearButton from '../components/ClearButton'
 import Input from '../components/Input'
 
 
-const ScreenLogin = ({ navigation }) => {
+const PageLogin = ({ navigation }) => {
     const [cpf, setCpf] = useState('')
     const [password, setPassword] = useState('')
     const isFormValid = () => cpf != '' && password != '';
@@ -35,7 +36,7 @@ const ScreenLogin = ({ navigation }) => {
     };
 
     const onPressForgot = () => { 
-        navigation.navigate('ScreenForgot')
+        navigation.navigate('PageForgotPassword')
     }
     return (
         <View style={styles.container}>
@@ -51,10 +52,10 @@ const ScreenLogin = ({ navigation }) => {
                     <Input placeholder="CPF" value={cpf} onChangeText={setCpf} />
                     <Input placeholder="Senha" value={password} onChangeText={setPassword} secureText={true} />
                     <View style={{ marginTop: 5 }}>
-                        <Button onPress={onPressLogin} title="Entrar" />
+                        <SolidButton onPress={onPressLogin} title="Entrar" />
                     </View>
                     <View style={styles.containerForgotPassword}>
-                        <Button onPress={onPressForgot} title="Esqueci a senha" style={styles.textForgotPassword} />
+                        <ClearButton onPress={onPressForgot} title="Esqueci a senha"  />
                     </View>
                 </View>
             </View>
@@ -63,4 +64,4 @@ const ScreenLogin = ({ navigation }) => {
 }
 
 
-export default ScreenLogin;
+export default PageLogin;
