@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, ActivityIndicator } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
-// import { Button } from 'react-native-elements';
 
 import ClearButton from "./ClearButton"
 import SolidButton from "./SolidButton"
@@ -53,16 +52,13 @@ const ReadScanner = (props) => {
       </BarCodeScanner>
       <View style={{
         marginTop: 50,
-        alignItems: 'center',
         flexDirection: 'row',
-        justifyContent: 'space-between'
       }}>
         <ClearButton onPress={props.onPress} title="Sair" />
         {
           scanned &&
           <SolidButton title={'Scannear Novamente'} onPress={() => setScanned(false)} />}
       </View>
-
     </View>
   );
 }

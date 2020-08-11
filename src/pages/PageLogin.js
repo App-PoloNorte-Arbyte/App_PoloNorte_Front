@@ -2,7 +2,7 @@ import 'react-native-gesture-handler'
 import React, { useState } from 'react'
 import { Text, View, StatusBar, Image, Alert, AsyncStorage } from 'react-native'
 
-import callLogin from '../Api/callLogin'
+import getLogin from '../Api/getLogin'
 import logo from '../images/logo.png'
 import styles from '../styles/screenLogin'
 import SolidButton from '../components/SolidButton'
@@ -20,13 +20,13 @@ const PageLogin = ({ navigation }) => {
         if (!isFormValid()) {
             return Alert.alert("Preencha os campos obrigatórios")
         }
-        callLogin(cpf, password)
+        getLogin(cpf, password)
             .then((response) => {
                 return AsyncStorage.setItem('user', JSON.stringify(response.data))
             })
             .then(() => {
                 resetInput()
-                navigation.navigate('PaginaScanner')
+                navigation.navigate('PageScanner')
             })
             .catch(e => {
                 resetInput()

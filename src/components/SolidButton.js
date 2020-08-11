@@ -8,7 +8,7 @@ const SolidButton = (props) => {
             titleStyle={{ color: '#001435' }}
             containerStyle={{
                 backgroundColor: '#001435',
-                width: '60%',
+                width: '48%',
                 alignSelf: 'center',
                 height: 35,
                 justifyContent: 'center',

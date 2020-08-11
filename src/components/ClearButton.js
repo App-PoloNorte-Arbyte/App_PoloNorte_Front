@@ -9,7 +9,7 @@ const ClearButton = (props) => {
       titleStyle={{ color: '#EAEAEA' }}
       type="clear"
       containerStyle={{
-        width: '60%',
+        width: '48%',
         alignSelf: 'center',
         height: 35,
         justifyContent: 'center',

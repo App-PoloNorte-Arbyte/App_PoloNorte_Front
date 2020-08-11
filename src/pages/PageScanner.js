@@ -1,22 +1,22 @@
 import React, { useState, useEffect, } from 'react';
 import { Alert, View, StyleSheet, Modal, StatusBar, Image, AsyncStorage } from 'react-native';
 
-import ReadScanner from '../components/ReadScanner';
+import getEquipment from '../Api/getEquipment'
+
 import logo from '../images/logo.png'
 
+import ReadScanner from '../components/ReadScanner';
 import SolidButton from '../components/SolidButton'
 import ClearButton from '../components/ClearButton'
 
-
-const PaginaScanner = ({ navigation }) => {
+const PageScanner = ({ navigation }) => {
     const [user, setUser] = useState({})
 
     useEffect(() => {
         AsyncStorage.getItem('user')
             .then((response) => {
                 if (response == null) {
-                    navigation.navigate('PageLogin')
-                    return
+                    return navigation.navigate('PageLogin')
                 } else {
                     let responseParse = JSON.parse(response)
                     setUser(responseParse)
@@ -27,15 +27,29 @@ const PaginaScanner = ({ navigation }) => {
                 console.log(error);
             });
     }, [])
-    
-    const [isVisibleCam, setIsVisibleCam] = useState(false) ;
-   
+
+    const [isVisibleCam, setIsVisibleCam] = useState(false);
+
     const onPressVisibleCam = () => {
         setIsVisibleCam(!isVisibleCam)
     };
 
-    const onQRCode = (id) => {
-        navigation.navigate('PageMaintenance', id);
+    const onQRCode = async (id) => {
+        try {
+            const { data } = await getEquipment(id, user.token)
+            navigation.navigate('PageMaintenance', { data });
+        } catch (e) {
+            Alert.alert('Equipamento não encontrado, tente novamente')
+        }
+    };
+
+    const onPressChangePassword = () => {
+        navigation.navigate('PageChangePassword') 
+    };
+
+    const onPressExit = async () => {
+        await AsyncStorage.removeItem('user');
+        return navigation.navigate('PageLogin')
     };
 
     return (
@@ -48,11 +62,8 @@ const PaginaScanner = ({ navigation }) => {
                 <SolidButton onPress={onPressVisibleCam} title="Ler QRCode" />
             </View>
             <View style={styles.containerButtons}>
-                <ClearButton onPress={() => { navigation.navigate('PageChangePassword') }} title="Redefinir senha" />
-                <ClearButton onPress={() => {
-                    navigation.navigate('PageLogin')
-                    return AsyncStorage.removeItem('user')
-                }} title="Sair" />
+                <ClearButton onPress={onPressChangePassword} title="Redefinir senha" />
+                <ClearButton onPress={onPressExit} title="Sair" />
             </View>
             <Modal
                 animationType="slide"
@@ -63,7 +74,7 @@ const PaginaScanner = ({ navigation }) => {
             </Modal>
         </View >
     );
-}
+};
 
 const styles = StyleSheet.create({
     container: {
@@ -93,4 +104,4 @@ const styles = StyleSheet.create({
 })
 
 
-export default PaginaScanner;
+export default PageScanner;
