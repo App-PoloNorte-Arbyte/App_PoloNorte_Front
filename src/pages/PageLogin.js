@@ -1,6 +1,9 @@
 import 'react-native-gesture-handler'
 import React, { useState } from 'react'
 import { Text, View, StatusBar, Image, Alert, AsyncStorage } from 'react-native'
+import {connect} from 'react-redux'
+import login from '../actions/login'
+
 
 import getLogin from '../Api/getLogin'
 import logo from '../images/logo.png'
@@ -10,7 +13,7 @@ import ClearButton from '../components/ClearButton'
 import Input from '../components/Input'
 
 
-const PageLogin = ({ navigation }) => {
+const PageLogin = ({ navigation, dispatch }) => {
     const [cpf, setCpf] = useState('')
     const [password, setPassword] = useState('')
     const isFormValid = () => cpf != '' && password != '';
@@ -22,7 +25,9 @@ const PageLogin = ({ navigation }) => {
         }
         getLogin(cpf, password)
             .then((response) => {
-                return AsyncStorage.setItem('user', JSON.stringify(response.data))
+                const user = response.data
+                dispatch(login(user))
+                return AsyncStorage.setItem('user', JSON.stringify(user))
             })
             .then(() => {
                 resetInput()
@@ -63,5 +68,10 @@ const PageLogin = ({ navigation }) => {
     )
 }
 
+const mapStoreToProps = store => {
+    return {
+        user: store.user,
+    }
+}
 
-export default PageLogin;
+export default connect(mapStoreToProps)(PageLogin);

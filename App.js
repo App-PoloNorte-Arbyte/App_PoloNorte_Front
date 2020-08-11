@@ -12,22 +12,25 @@ import PageChangePassword from './src/pages/PageChangePassword'
 import PageScanner from './src/pages/PageScanner'
 import PageMaintenance from './src/pages/PageMaintenance'
 
-const Stack = createStackNavigator()
+import reducer from './src/reducers/reducer'
 
+const Stack = createStackNavigator()
+const store = createStore(reducer)
 
 function App() {
 
   return (
-
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="PageScanner" screenOptions={{ headerShown: false, transitionSpec: { open: config, close: config } }} >
-        <Stack.Screen name="PageLogin" component={PageLogin} />
-        <Stack.Screen name="PageForgotPassword" component={PageForgotPassword} />
-        <Stack.Screen name="PageChangePassword" component={PageChangePassword} />
-        <Stack.Screen name="PageScanner" component={PageScanner} />
-        <Stack.Screen name="PageMaintenance" component={PageMaintenance} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="PageScanner" screenOptions={{ headerShown: false, transitionSpec: { open: config, close: config } }} >
+          <Stack.Screen name="PageLogin" component={PageLogin} />
+          <Stack.Screen name="PageForgotPassword" component={PageForgotPassword} />
+          <Stack.Screen name="PageChangePassword" component={PageChangePassword} />
+          <Stack.Screen name="PageScanner" component={PageScanner} />
+          <Stack.Screen name="PageMaintenance" component={PageMaintenance} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   )
 }
 

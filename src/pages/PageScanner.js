@@ -1,7 +1,11 @@
 import React, { useState, useEffect, } from 'react';
-import { Alert, View, StyleSheet, Modal, StatusBar, Image, AsyncStorage } from 'react-native';
+import { Alert, View, Modal, StatusBar, Image, AsyncStorage } from 'react-native';
 
 import getEquipment from '../Api/getEquipment'
+
+import { connect } from 'react-redux'
+import login from '../actions/login'
+import equipment from '../actions/equipment'
 
 import logo from '../images/logo.png'
 
@@ -9,8 +13,9 @@ import ReadScanner from '../components/ReadScanner';
 import SolidButton from '../components/SolidButton'
 import ClearButton from '../components/ClearButton'
 
-const PageScanner = ({ navigation }) => {
-    const [user, setUser] = useState({})
+import styles from '../styles/screenScanner'
+
+const PageScanner = ({ navigation, dispatch, user }) => {
 
     useEffect(() => {
         AsyncStorage.getItem('user')
@@ -19,12 +24,12 @@ const PageScanner = ({ navigation }) => {
                     return navigation.navigate('PageLogin')
                 } else {
                     let responseParse = JSON.parse(response)
-                    setUser(responseParse)
+                    dispatch(login(responseParse))
                 }
             })
-            .catch((error) => {
+            .catch((e) => {
                 Alert.alert('Usuario Não Encontrado!')
-                console.log(error);
+                console.log(e.response.data);
             });
     }, [])
 
@@ -37,14 +42,16 @@ const PageScanner = ({ navigation }) => {
     const onQRCode = async (id) => {
         try {
             const { data } = await getEquipment(id, user.token)
-            navigation.navigate('PageMaintenance', { data });
+            await dispatch(equipment(data))
+            return navigation.navigate('PageMaintenance');
         } catch (e) {
             Alert.alert('Equipamento não encontrado, tente novamente')
+            console.log(e.response.data);
         }
     };
 
     const onPressChangePassword = () => {
-        navigation.navigate('PageChangePassword') 
+        navigation.navigate('PageChangePassword')
     };
 
     const onPressExit = async () => {
@@ -76,32 +83,11 @@ const PageScanner = ({ navigation }) => {
     );
 };
 
-const styles = StyleSheet.create({
-    container: {
-        backgroundColor: '#001435',
-        flex: 1,
-        paddingVertical: 30
-    },
-    containerLogo: {
-        flex: 1,
-        alignItems: 'center'
-    },
-    logo: {
-        height: 121,
-        width: 220
-    },
-    buttonCode: {
-        flex: 1,
-        marginTop: 30,
-        width: '60%',
-        alignSelf: 'center',
-    },
-    containerButtons: {
-        margin: 15,
-        justifyContent: 'space-evenly',
-        padding: 20
+
+const mapStoreToProps = store => {
+    return {
+        user: store.user,
     }
-})
+}
 
-
-export default PageScanner;
+export default connect(mapStoreToProps)(PageScanner);
