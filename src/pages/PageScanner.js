@@ -45,7 +45,7 @@ const PageScanner = ({ navigation, dispatch, user }) => {
             await dispatch(equipment(data))
             return navigation.navigate('PageMaintenance');
         } catch (e) {
-            Alert.alert('Equipamento não encontrado, tente novamente')
+            Alert.alert('QR code inválido, tente novamente')
             console.log(e.response.data);
         }
     };
@@ -66,7 +66,7 @@ const PageScanner = ({ navigation, dispatch, user }) => {
                 <Image style={styles.logo} source={logo} />
             </View>
             <View style={styles.buttonCode}>
-                <SolidButton onPress={onPressVisibleCam} title="Ler QRCode" />
+                <SolidButton onPress={onPressVisibleCam} title="Nova Manutenção" />
             </View>
             <View style={styles.containerButtons}>
                 <ClearButton onPress={onPressChangePassword} title="Redefinir senha" />
