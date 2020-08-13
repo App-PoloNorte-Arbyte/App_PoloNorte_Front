@@ -15,12 +15,12 @@ const styles = StyleSheet.create({
     },
     viewTop: {
         justifyContent: 'center',
-        paddingTop: 10
+        marginTop: '10%'
     },
     textnewPassword: {
         color: '#FFFFFF',
         textAlign: 'center',
-        fontSize: 20
+        fontSize: 20,
     },
     textInput: {
         height: 30,
@@ -34,7 +34,27 @@ const styles = StyleSheet.create({
     },
     viewButton: {
         flex: 1,
+        justifyContent: 'flex-start',
+        marginTop: '30%'
+    },
+    buttonStyle: {
+        width: '60%',
+        backgroundColor: '#FFFFFF',
+        alignSelf: 'center',
+        height: 30,
         justifyContent: 'center',
+        shadowOffset: {
+            width: 0,
+            height: 6,
+        },
+        shadowOpacity: 0.37,
+        shadowRadius: 7.49,
+        elevation: 12,
+    },
+    viewButton2: {
+        flex: 1,
+        justifyContent: 'flex-start',
+        marginTop: '10%'
     },
     buttonStyle: {
         width: '60%',

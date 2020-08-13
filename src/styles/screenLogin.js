@@ -17,17 +17,18 @@ const styles = StyleSheet.create({
   containerLogin: {
     flex: 1,
     justifyContent: 'center',
-    paddingTop: 10
+    paddingTop: 10,
+    marginTop: '10%'
   },
   textLogin: {
-    marginTop: 30,
+    marginTop: '10%',
     color: '#EAEAEA',
     textAlign: 'center',
     fontSize: 28
   },
   containerForgotPassword: {
     flex: 1, 
-    marginTop: 20
+    marginTop: '8%'
   },
   textForgotPassword: {
     color: '#EAEAEA',

@@ -6,24 +6,35 @@ const styles = StyleSheet.create({
         backgroundColor: '#001435',
         paddingTop: 55
     },
+    containerLogo: {
+        flex: 1,
+        alignItems: 'center'
+    },
+    logo: {
+        height: 121,
+        width: 220
+    },
     boxModel: {
-        height: '27%',
+        // height: '27%',
         backgroundColor: '#EAEAEA',
-        marginHorizontal: 30
+        marginHorizontal: 30,
+        marginTop: '10%'
     },
     textBoxModel: {
         fontSize: 25,
         marginLeft: 8,
         paddingVertical: 5,
+        fontWeight: 'bold'
     },
     viewCenter: {
         backgroundColor: '#001435',
         height: '8%'
     },
     boxMaintenance: {
-        height: '25%',
+        height: 150,
         backgroundColor: '#EAEAEA',
         marginHorizontal: 30,
+        marginTop: '15%'
     },
     textDescription: {
         textAlign: 'left',
@@ -33,6 +44,7 @@ const styles = StyleSheet.create({
     viewButton: {
         flex: 1,
         justifyContent: 'space-evenly',
+        marginTop: '10%'
     },
     buttonStyle: {
         width: '60%',

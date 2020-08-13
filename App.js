@@ -4,28 +4,26 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
-
-
-import ScreenLogin from './src/pages/ScreenLogin'
+import PageLogin from './src/pages/PageLogin'
 import PageForgotPassword from './src/pages/PageForgotPassword'
 import PageChangePassword from './src/pages/PageChangePassword'
-import PaginaScanner from './src/pages/paginaScanner'
+import PageScanner from './src/pages/PageScanner'
 import PageMaintenance from './src/pages/PageMaintenance'
-import addDescription from './src/reducers/addDescription'
+import reducer from './src/reducers/reducer'
 
 const Stack = createStackNavigator()
-const store = createStore(addDescription)
+const store = createStore(reducer)
 
 function App() {
 
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="ScreenLogin" screenOptions={{ headerShown: false, transitionSpec: { open: config, close: config } }} >
-          <Stack.Screen name="ScreenLogin" component={ScreenLogin} />
+        <Stack.Navigator initialRouteName="PageLogin" screenOptions={{ headerShown: false, transitionSpec: { open: config, close: config } }} >
+          <Stack.Screen name="PageLogin" component={PageLogin} />
           <Stack.Screen name="PageForgotPassword" component={PageForgotPassword} />
           <Stack.Screen name="PageChangePassword" component={PageChangePassword} />
-          <Stack.Screen name="PaginaScanner" component={PaginaScanner} />
+          <Stack.Screen name="PageScanner" component={PageScanner} />
           <Stack.Screen name="PageMaintenance" component={PageMaintenance} />
         </Stack.Navigator>
       </NavigationContainer>
