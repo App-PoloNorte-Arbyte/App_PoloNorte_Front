@@ -69,7 +69,7 @@ const PageScanner = ({ navigation, dispatch, user }) => {
                 <Image style={styles.logo} source={logo} />
             </View>
             <View style={styles.buttonCode}>
-                <SolidButton onPress={onPressVisibleCam} title="Nova Manutenção" />
+                <SolidButton title="Nova Manutenção" onPress={onPressVisibleCam} />
             </View>
             <View style={styles.containerButtons}>
                 <ClearButton onPress={onPressChangePassword} title="Redefinir senha" />

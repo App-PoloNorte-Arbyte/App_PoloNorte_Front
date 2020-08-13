@@ -1,37 +1,83 @@
 import 'react-native-gesture-handler'
-import React, { useState } from 'react'
-import { Text, View, Image, TextInput, TouchableOpacity, StatusBar, ScrollView } from 'react-native'
-import logo from '../images/logo.png'
+import React, { useState, useEffect } from 'react'
+import { Text, View, Image, StatusBar, ScrollView, Alert, AsyncStorage, Modal } from 'react-native'
 import styles from '../styles/screenMaintenance'
+import SolidButton from '../components/SolidButton'
+import { InputMaintenance } from '../components/Input'
+import addDescription from '../Api/addDescription'
+import { connect } from 'react-redux'
+import logo from '../images/logo.png'
+import ModalDescription from '../components/modalDescription'
 
-const PageMaintenance = () => {
+
+const PageMaintenance = ({ navigation, equipment, user }) => {
+    const [visible, setvisible] = useState(false)
+    const [maintenance, setMaintenance] = useState('')
+    const isFormValid = () => maintenance != ''
+    const resetInput = () => { setMaintenance('') }
+
+    const onPressModal = () => {
+        if (!isFormValid()) {
+            return Alert.alert('Informação Inválida!', 'Por favor, insira uma manutenção!')
+        }
+        setvisible(!visible)
+    }
+
+    const validMaintenance = () => {
+        addDescription(user.token, equipment.id, maintenance)
+            .then((res) => {
+                resetInput()
+                Alert.alert('Descrição realizado com sucesso!', 'Sua descrição foi enviada!'), onPressModal()
+                console.log(res)
+            })
+            .catch((err) => {
+                Alert.alert('Falha ao cadastrar a manutenção!', 'Por favor tente novamente mais tarde!'), onPressModal()
+                console.log('erro', err)
+            })
+
+    }
+
     return (
         <View style={styles.container}>
-            <StatusBar backgroundColor={'#001435'} />
-            <View style={styles.boxModel}>
-                <Text style={styles.textBoxModel}>Fabricante:</Text>
-                <Text style={styles.textBoxModel}>Ano:</Text>
-                <Text style={styles.textBoxModel}>Modelo:</Text>
-            </View>
-            <View style={styles.viewCenter}></View>
-            <View style={styles.boxMaintenance}>
-                <ScrollView>
-                    <TextInput style={styles.textDescription}
-                        placeholder='Descreva a Manutenção...'
+            <ScrollView>
+                <View style={styles.containerLogo}>
+                    <Image style={styles.logo} source={logo} />
+                </View>
+                <StatusBar backgroundColor={'#001435'} />
+                <View style={styles.boxModel}>
+                    <Text style={styles.textBoxModel}>Fabricante: {equipment.brand}</Text>
+                    <Text style={styles.textBoxModel}>Ano: {equipment.year}</Text>
+                    <Text style={styles.textBoxModel}>Modelo: {equipment.model}</Text>
+                </View>
+                <View style={styles.boxMaintenance}>
+                    <InputMaintenance placeholder='Descreva a Manutenção...'
                         multiline={true}
-                    />
-                </ScrollView>
-            </View>
-            <View style={styles.viewButton}>
-                <TouchableOpacity style={styles.buttonStyle}>
-                    <Text style={styles.buttonText}>Efetuar Manutenção</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.buttonStyle}>
-                    <Text style={styles.buttonText}>Voltar</Text>
-                </TouchableOpacity>
-            </View>
+                        onChangeText={setMaintenance}
+                        value={maintenance} />
+                </View>
+                <View style={styles.viewButton}>
+                    <SolidButton title='Efetuar Manutenção' onPress={onPressModal} />
+                </View>
+                <View style={styles.viewButton}>
+                    <SolidButton onPress={() => { navigation.goBack() }} title='Voltar' />
+                </View>
+            </ScrollView>
+            <Modal
+                visible={visible}
+                animationType='fade'
+                transparent={true}
+            >
+                <ModalDescription visible={setvisible} validMaintenance={validMaintenance} />
+            </Modal>
         </View>
     )
 }
 
-export default PageMaintenance;
+const mapStateToProps = (store) => {
+    return {
+        equipment: store.equipment,
+        user: store.user
+    }
+}
+
+export default connect(mapStateToProps)(PageMaintenance)

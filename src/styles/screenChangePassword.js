@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
         width: 220
     },
     viewTop: {
-        justifyContent:'center',
+        justifyContent: 'center',
         paddingTop: 10
     },
     textnewPassword: {
@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
     viewButton: {
         flex: 1,
         justifyContent: 'center',
+        marginTop: '13%'
     },
     buttonStyle: {
         width: '60%',
