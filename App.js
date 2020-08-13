@@ -4,14 +4,11 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
-
-
 import PageLogin from './src/pages/PageLogin'
 import PageForgotPassword from './src/pages/PageForgotPassword'
 import PageChangePassword from './src/pages/PageChangePassword'
 import PageScanner from './src/pages/PageScanner'
 import PageMaintenance from './src/pages/PageMaintenance'
-
 import reducer from './src/reducers/reducer'
 
 const Stack = createStackNavigator()
