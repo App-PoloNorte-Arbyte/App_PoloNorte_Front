@@ -1,19 +1,22 @@
 import 'react-native-gesture-handler'
 import React, { useState } from 'react'
 import { Text, View, StatusBar, Image, Alert, AsyncStorage } from 'react-native'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import login from '../actions/login'
 
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { Input } from 'react-native-elements';
 
-import getLogin from '../Api/getLogin'
+
+import doLogin from '../Api/doLogin'
 import logo from '../images/logo.png'
 import styles from '../styles/screenLogin'
 import SolidButton from '../components/SolidButton'
 import ClearButton from '../components/ClearButton'
-import Input from '../components/Input'
 
 
-const PageLogin = ({ navigation, dispatch }) => {
+
+const PageLogin = ({ navigation, dispatch, user }) => {
     const [cpf, setCpf] = useState('')
     const [password, setPassword] = useState('')
     const isFormValid = () => cpf != '' && password != '';
@@ -23,7 +26,7 @@ const PageLogin = ({ navigation, dispatch }) => {
         if (!isFormValid()) {
             return Alert.alert("Preencha os campos obrigatórios")
         }
-        getLogin(cpf, password)
+        doLogin(cpf, password)
             .then((response) => {
                 const user = response.data
                 dispatch(login(user))
@@ -40,7 +43,7 @@ const PageLogin = ({ navigation, dispatch }) => {
             });
     };
 
-    const onPressForgot = () => { 
+    const onPressForgot = () => {
         navigation.navigate('PageForgotPassword')
     }
     return (
@@ -51,16 +54,38 @@ const PageLogin = ({ navigation, dispatch }) => {
                     <Image style={styles.logo} source={logo} />
                     <Text style={styles.textLogin}>Login</Text>
                 </View>
-                <View>
-                </View>
                 <View style={styles.containerLogin}>
-                    <Input placeholder="CPF" value={cpf} onChangeText={setCpf} />
-                    <Input placeholder="Senha" value={password} onChangeText={setPassword} secureText={true} />
+                    <Input
+                        label="CPF"
+                        placeholder="Insira seu CPF"
+                        inputStyle={{ marginLeft: 10, color: "#EAEAEA" }}
+                        leftIcon={
+                            <Icon
+                                name='user-circle'
+                                size={24}
+                                color='#EAEAEA'
+                            />}
+                        value={cpf}
+                        onChangeText={text => setCpf(text)} />
+                    <Input
+                        label="Senha"
+                        placeholder="  Insira sua senha"
+                        secureTextEntry={true}
+                        inputStyle={{ marginLeft: 10, color: "#EAEAEA" }}
+                        value={password}
+                        onChangeText={text => setPassword(text)}
+                        leftIcon={
+                            <Icon
+                                name='unlock-alt'
+                                size={24}
+                                color='#EAEAEA'
+                            />} />
+
                     <View style={{ marginTop: 5 }}>
                         <SolidButton onPress={onPressLogin} title="Entrar" />
                     </View>
                     <View style={styles.containerForgotPassword}>
-                        <ClearButton onPress={onPressForgot} title="Esqueci a senha"  />
+                        <ClearButton onPress={onPressForgot} title="Esqueci a senha" />
                     </View>
                 </View>
             </View>
