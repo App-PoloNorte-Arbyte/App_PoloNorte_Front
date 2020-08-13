@@ -17,22 +17,21 @@ const PageMaintenance = ({ navigation, equipment, user }) => {
     const resetInput = () => { setMaintenance('') }
 
     const onPressModal = () => {
+        if (!isFormValid()) {
+            return Alert.alert('Informação Inválida!', 'Por favor, insira uma manutenção!')
+        }
         setvisible(!visible)
     }
 
     const validMaintenance = () => {
-        if (!isFormValid()) {
-            return Alert.alert('Informação Inválida!', 'Por favor, insira uma manutenção!')
-        }
-
         addDescription(user.token, equipment.id, maintenance)
             .then((res) => {
                 resetInput()
-                Alert.alert('Descrição realizado com sucesso!', 'Sua descrição foi enviada!')
+                Alert.alert('Descrição realizado com sucesso!', 'Sua descrição foi enviada!'), onPressModal()
                 console.log(res)
             })
             .catch((err) => {
-                Alert.alert('Falha ao cadastrar a manutenção!', 'Por favor tente novamente mais tarde!')
+                Alert.alert('Falha ao cadastrar a manutenção!', 'Por favor tente novamente mais tarde!'), onPressModal()
                 console.log('erro', err)
             })
 

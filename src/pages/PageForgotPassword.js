@@ -5,8 +5,9 @@ import logo from '../images/logo.png'
 import styles from '../styles/screenForgotPassword'
 import { Input } from '../components/Input'
 import SolidButton from '../components/SolidButton'
+import ClearButton from '../components/ClearButton'
 
-const PageForgotPassword = () => {
+const PageForgotPassword = ({ navigation }) => {
     const [cpf, setcpf] = useState('')
     return (
         <View style={styles.container}>
@@ -21,7 +22,7 @@ const PageForgotPassword = () => {
                     <SolidButton title='Enviar' />
                 </View>
                 <View style={styles.viewButton2}>
-                    <SolidButton title='Voltar' />
+                    <ClearButton title='Voltar' onPress={() => navigation.goBack()} />
                 </View>
             </ScrollView>
         </View>

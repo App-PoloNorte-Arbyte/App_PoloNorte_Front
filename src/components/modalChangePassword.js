@@ -2,8 +2,9 @@ import { Text, View, StyleSheet } from 'react-native'
 import React from 'react'
 import SolidButtonModal from './SolidButtonModal'
 import ClearButtonModal from './ClearButtonModal'
+import 'react-native-gesture-handler'
 
-const ModalDescription = ({ visible, validMaintenance }) => {
+const ModalChangePassword = ({ visible, validPassword, navigation }) => {
     const onPressexit = () => {
         visible(false)
     }
@@ -11,16 +12,16 @@ const ModalDescription = ({ visible, validMaintenance }) => {
 
         <View style={styles.container}>
             <View style={styles.containerModal}>
-                <Text style={styles.textModal}>Sua descrição está correta?</Text>
+                <Text style={styles.textModal}>Agora esta será sua nova senha!{'\n'}Pressione Ok para confirmar!</Text>
                 <View style={styles.viewButton}>
                     <ClearButtonModal title='Sair' onPress={onPressexit} />
-                    <SolidButtonModal title='Enviar' onPress={() => validMaintenance()} />
+                    <SolidButtonModal title='Ok' onPress={() => {validPassword()}} />
                 </View>
             </View>
         </View>
     )
 }
-export default ModalDescription
+export default ModalChangePassword
 
 const styles = StyleSheet.create({
     container: {
