@@ -1,5 +1,5 @@
 import React, { useState, useEffect, } from 'react';
-import { Alert, View, Modal, StatusBar, Image, AsyncStorage } from 'react-native';
+import { Alert, View, Modal, StatusBar, Image, AsyncStorage, ActivityIndicator } from 'react-native';
 
 import getEquipment from '../Api/getEquipment'
 
@@ -17,14 +17,20 @@ import styles from '../styles/screenScanner'
 
 const PageScanner = ({ navigation, dispatch, user }) => {
 
+    const [loading, setLoading] = useState(false);
     useEffect(() => {
+        setLoading(true)
         AsyncStorage.getItem('user')
             .then((response) => {
                 if (response == null) {
+                    setTimeout(() => {
+                        setLoading(false)
+                    }, 1000);
                     return navigation.navigate('PageLogin')
                 } else {
                     let responseParse = JSON.parse(response)
                     dispatch(login(responseParse))
+                    setLoading(false)
                 }
             })
             .catch((e) => {
@@ -41,7 +47,7 @@ const PageScanner = ({ navigation, dispatch, user }) => {
 
     const onQRCode = async (id) => {
         try {
-            if(isNaN(Number(id))){
+            if (isNaN(Number(id))) {
                 return Alert.alert('QR code inválido, tente novamente')
             }
             const { data } = await getEquipment(id, user.token)
@@ -65,16 +71,24 @@ const PageScanner = ({ navigation, dispatch, user }) => {
     return (
         <View style={styles.container}>
             <StatusBar backgroundColor={'#001435'} />
-            <View style={styles.containerLogo}>
-                <Image style={styles.logo} source={logo} />
-            </View>
-            <View style={styles.buttonCode}>
-                <SolidButton onPress={onPressVisibleCam} title="Nova Manutenção" />
-            </View>
-            <View style={styles.containerButtons}>
-                <ClearButton onPress={onPressChangePassword} title="Redefinir senha" />
-                <ClearButton onPress={onPressExit} title="Sair" />
-            </View>
+            {loading
+                ? <View style={styles.containerLoading}>
+                    <ActivityIndicator size="large" color="purple" />
+                </View>
+                : <>
+                    <View style={styles.containerLogo}>
+                        <Image style={styles.logo} source={logo} />
+                    </View>
+
+                    <View style={styles.buttonCode}>
+                        <SolidButton onPress={onPressVisibleCam} title="Nova Manutenção" />
+                    </View>
+                    <View style={styles.containerButtons}>
+                        <ClearButton onPress={onPressChangePassword} title="Redefinir senha" />
+                        <ClearButton onPress={onPressExit} title="Sair" />
+                    </View>
+                </>
+            }
             <Modal
                 animationType="slide"
                 transparent={false}

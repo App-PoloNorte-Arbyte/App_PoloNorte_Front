@@ -7,6 +7,12 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingVertical: 30
   },
+  containerLoading: {
+    backgroundColor: '#001435',
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
   containerLogo: {
     flex: 1,
     alignItems: 'center'
