@@ -41,11 +41,14 @@ const PageScanner = ({ navigation, dispatch, user }) => {
 
     const onQRCode = async (id) => {
         try {
+            if(isNaN(Number(id))){
+                return Alert.alert('QR code inválido, tente novamente')
+            }
             const { data } = await getEquipment(id, user.token)
             await dispatch(equipment(data))
             return navigation.navigate('PageMaintenance');
         } catch (e) {
-            Alert.alert('QR code inválido, tente novamente')
+            Alert.alert('Equipamento não encontrado')
             console.log(e.response.data);
         }
     };

@@ -4,8 +4,11 @@ import { Text, View, StatusBar, Image, Alert, AsyncStorage, ScrollView } from 'r
 import { connect } from 'react-redux'
 import login from '../actions/login'
 
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { Input } from 'react-native-elements';
 
-import getLogin from '../Api/getLogin'
+
+import doLogin from '../Api/doLogin'
 import logo from '../images/logo.png'
 import styles from '../styles/screenLogin'
 import SolidButton from '../components/SolidButton'
@@ -13,7 +16,9 @@ import ClearButton from '../components/ClearButton'
 import {Input} from '../components/Input'
 
 
-const PageLogin = ({ navigation, dispatch }) => {
+
+
+const PageLogin = ({ navigation, dispatch, user }) => {
     const [cpf, setCpf] = useState('')
     const [password, setPassword] = useState('')
     const isFormValid = () => cpf != '' && password != '';
@@ -23,7 +28,7 @@ const PageLogin = ({ navigation, dispatch }) => {
         if (!isFormValid()) {
             return Alert.alert("Preencha os campos obrigatórios")
         }
-        getLogin(cpf, password)
+        doLogin(cpf, password)
             .then((response) => {
                 const user = response.data
                 dispatch(login(user))
