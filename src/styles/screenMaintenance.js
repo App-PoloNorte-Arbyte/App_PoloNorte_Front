@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native'
+import { color } from 'react-native-reanimated'
 
 const styles = StyleSheet.create({
     container: {
@@ -16,15 +17,16 @@ const styles = StyleSheet.create({
     },
     boxModel: {
         // height: '27%',
-        backgroundColor: '#EAEAEA',
+        // backgroundColor: '#EAEAEA',
         marginHorizontal: 30,
         marginTop: '10%'
     },
     textBoxModel: {
-        fontSize: 25,
+        fontSize: 20,
         marginLeft: 8,
         paddingVertical: 5,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        color: '#EAEAEA'
     },
     viewCenter: {
         backgroundColor: '#001435',
@@ -32,7 +34,7 @@ const styles = StyleSheet.create({
     },
     boxMaintenance: {
         height: 150,
-        backgroundColor: '#EAEAEA',
+        // backgroundColor: '#EAEAEA',
         marginHorizontal: 30,
         marginTop: '15%'
     },
@@ -44,7 +46,7 @@ const styles = StyleSheet.create({
     viewButton: {
         flex: 1,
         justifyContent: 'space-evenly',
-        marginTop: '10%'
+        marginTop: '18%'
     },
     buttonStyle: {
         width: '60%',

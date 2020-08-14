@@ -15,6 +15,7 @@ import ClearButton from '../components/ClearButton'
 
 import styles from '../styles/screenScanner'
 
+
 const PageScanner = ({ navigation, dispatch, user }) => {
 
     const [loading, setLoading] = useState(false);
@@ -81,11 +82,20 @@ const PageScanner = ({ navigation, dispatch, user }) => {
                     </View>
 
                     <View style={styles.buttonCode}>
-                        <SolidButton onPress={onPressVisibleCam} title="Nova Manutenção" />
+                        <SolidButton onPress={onPressVisibleCam}
+                            title="Nova Manutenção"
+                            name='qrcode'
+                        />
                     </View>
                     <View style={styles.containerButtons}>
-                        <ClearButton onPress={onPressChangePassword} title="Redefinir senha" />
-                        <ClearButton onPress={onPressExit} title="Sair" />
+                        <ClearButton onPress={onPressChangePassword}
+                            title="Redefinir senha"
+                            name='exchange'
+                        />
+                        <ClearButton onPress={onPressExit}
+                            title="Sair"
+                            name='sign-out'
+                        />
                     </View>
                 </>
             }
@@ -94,12 +104,13 @@ const PageScanner = ({ navigation, dispatch, user }) => {
                 transparent={false}
                 visible={isVisibleCam}
             >
-                <ReadScanner onPress={onPressVisibleCam} onQRCode={onQRCode} />
+                <ReadScanner onPress={onPressVisibleCam}
+                    onQRCode={onQRCode}
+                />
             </Modal>
         </View >
     );
 };
-
 
 const mapStoreToProps = store => {
     return {

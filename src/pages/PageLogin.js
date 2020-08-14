@@ -3,11 +3,8 @@ import React, { useState } from 'react'
 import { Text, View, StatusBar, Image, Alert, AsyncStorage, ScrollView } from 'react-native'
 import { connect } from 'react-redux'
 import login from '../actions/login'
-
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input } from 'react-native-elements';
-
-
 import doLogin from '../Api/doLogin'
 import logo from '../images/logo.png'
 import styles from '../styles/screenLogin'
@@ -53,8 +50,6 @@ const PageLogin = ({ navigation, dispatch, user }) => {
                         <Image style={styles.logo} source={logo} />
                         <Text style={styles.textLogin}>Login</Text>
                     </View>
-                    <View>
-                    </View>
                     <View style={styles.containerLogin}>
                         <Input
                             label="CPF"
@@ -67,7 +62,9 @@ const PageLogin = ({ navigation, dispatch, user }) => {
                                     color='#EAEAEA'
                                 />}
                             value={cpf}
-                            onChangeText={text => setCpf(text)} />
+                            onChangeText={text => setCpf(text)}
+                            keyboardType='numeric'
+                        />
                         <Input
                             label="Senha"
                             placeholder="  Insira sua senha"
@@ -77,19 +74,25 @@ const PageLogin = ({ navigation, dispatch, user }) => {
                             onChangeText={text => setPassword(text)}
                             leftIcon={
                                 <Icon
-                                    name='unlock-alt'
+                                    name='lock'
                                     size={24}
                                     color='#EAEAEA'
                                 />}
                         />
-                            <View style={{ marginTop: '8%' }}>
-                                <SolidButton onPress={onPressLogin} title="Entrar" />
-                            </View>
-                            <View style={styles.containerForgotPassword}>
-                                <ClearButton onPress={onPressForgot} title="Esqueci a senha" />
-                            </View>
+                        <View style={{ marginTop: '8%' }}>
+                            <SolidButton onPress={onPressLogin}
+                                title="Entrar"
+                                name='sign-in'
+                            />
+                        </View>
+                        <View style={styles.containerForgotPassword}>
+                            <ClearButton onPress={onPressForgot}
+                                title="Esqueci a senha"
+                                name='edit'
+                            />
+                        </View>
                     </View>
-                    </View>
+                </View>
             </ScrollView>
         </View>
     )
@@ -97,7 +100,7 @@ const PageLogin = ({ navigation, dispatch, user }) => {
 
 const mapStoreToProps = store => {
     return {
-                user: store.user,
+        user: store.user,
     }
 }
 
