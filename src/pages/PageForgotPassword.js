@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler'
 import React, { useState } from 'react'
-import { Text, View, Image, StatusBar, ScrollView } from 'react-native'
+import { Text, View, Image, StatusBar, ScrollView, Alert } from 'react-native'
 import logo from '../images/logo.png'
 import styles from '../styles/screenForgotPassword'
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -8,8 +8,25 @@ import { Input } from 'react-native-elements';
 import SolidButton from '../components/SolidButton'
 import ClearButton from '../components/ClearButton'
 
+import forgotPassword from '../Api/forgotPassword'
+
 const PageForgotPassword = ({ navigation }) => {
-    const [cpf, setcpf] = useState('')
+
+    const onPressForgot = () => {
+        const cpfConfirmed = cpf.replace(/[^\d]+/g, '')
+        console.log('cpfConfirmed: ', cpfConfirmed);
+        forgotPassword(cpfConfirmed)
+            .then(response => {
+                console.log('response: ', response);
+                Alert.alert('Atenção, a sua senha foi alterada com sucesso', 'Sua nova senha é os 4 ultimos digitos do seu cpf mais as 2 primeiras letras do seu nome')
+            })
+            .catch(e => {
+                console.log(e)
+                Alert.alert('CPF incorreto')
+            })
+    }
+
+    const [cpf, setCpf] = useState('')
     return (
         <View style={styles.container}>
             <ScrollView>
@@ -33,7 +50,7 @@ const PageForgotPassword = ({ navigation }) => {
                     />
                 </View>
                 <View style={styles.viewButton}>
-                    <SolidButton title='Enviar' name='share' />
+                    <SolidButton onPress={onPressForgot} title='Enviar' name='share' />
                 </View>
                 <View style={styles.viewButton2}>
                     <ClearButton title='Voltar' onPress={() => navigation.goBack()} name='undo' />
