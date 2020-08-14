@@ -66,7 +66,10 @@ const PageScanner = ({ navigation, dispatch, user }) => {
 
     const onPressExit = async () => {
         await AsyncStorage.removeItem('user');
-        return navigation.navigate('PageLogin')
+        return navigation.reset({
+            index: 0,
+            routes: [{name: 'PageLogin' }]
+        })
     };
 
     return (
