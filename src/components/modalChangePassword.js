@@ -4,18 +4,18 @@ import SolidButtonModal from './SolidButtonModal'
 import ClearButtonModal from './ClearButtonModal'
 import 'react-native-gesture-handler'
 
-const ModalChangePassword = ({ visible, validPassword, navigation }) => {
+const ModalChangePassword = ({ visible, validPassword }) => {
     const onPressexit = () => {
         visible(false)
     }
-    return (
 
+    return (
         <View style={styles.container}>
             <View style={styles.containerModal}>
                 <Text style={styles.textModal}>Agora esta será sua nova senha!{'\n'}Pressione Ok para confirmar!</Text>
                 <View style={styles.viewButton}>
-                    <ClearButtonModal title='Sair' onPress={onPressexit} />
-                    <SolidButtonModal title='Ok' onPress={() => {validPassword()}} />
+                    <ClearButtonModal title='Sair' onPress={onPressexit} name='reply' />
+                    <SolidButtonModal title='Ok' onPress={() => { validPassword() }} name='refresh' />
                 </View>
             </View>
         </View>

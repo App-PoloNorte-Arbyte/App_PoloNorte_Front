@@ -3,11 +3,8 @@ import React, { useState, useEffect } from 'react'
 import { Text, View, StatusBar, Image, Alert, AsyncStorage, ScrollView } from 'react-native'
 import { connect } from 'react-redux'
 import login from '../actions/login'
-
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input } from 'react-native-elements';
-
-
 import doLogin from '../Api/doLogin'
 import logo from '../images/logo.png'
 import styles from '../styles/screenLogin'
@@ -70,7 +67,9 @@ const PageLogin = ({ navigation, dispatch, user }) => {
                                     style={{ marginLeft: 10 }}
                                 />}
                             value={cpf}
-                            onChangeText={text => setCpf(text)} />
+                            onChangeText={text => setCpf(text)}
+                            keyboardType='numeric'
+                        />
                         <Input
                             label="Senha"
                             placeholder="  Insira sua senha"
@@ -81,17 +80,23 @@ const PageLogin = ({ navigation, dispatch, user }) => {
                             keyboardType='default'
                             leftIcon={
                                 <Icon
-                                    name='unlock-alt'
+                                    name='lock'
                                     size={24}
                                     color='#EAEAEA'
                                     style={{ marginLeft: 10 }}
                                 />}
                         />
                         <View style={{ marginTop: '8%' }}>
-                            <SolidButton onPress={onPressLogin} title="Entrar" />
+                            <SolidButton onPress={onPressLogin}
+                                title="Entrar"
+                                name='sign-in'
+                            />
                         </View>
                         <View style={styles.containerForgotPassword}>
-                            <ClearButton onPress={onPressForgot} title="Esqueci a senha" />
+                            <ClearButton onPress={onPressForgot}
+                                title="Esqueci a senha"
+                                name='edit'
+                            />
                         </View>
                     </View>
                 </View>

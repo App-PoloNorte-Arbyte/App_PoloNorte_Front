@@ -51,7 +51,7 @@ const InputMaintenance = ({ placeholder, onChangeText, value, secureText, multil
 
 const stylesMaintenance = StyleSheet.create({
   textInput: {
-    height: 115,
+    height: 35,
     width: '60%',
     borderColor: '#EAEAEA',
     borderWidth: 2,
@@ -66,4 +66,5 @@ const stylesMaintenance = StyleSheet.create({
     justifyContent: 'center',
   }
 });
+
 export { Input, InputMaintenance };

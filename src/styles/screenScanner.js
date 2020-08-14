@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
   buttonCode: {
     flex: 1,
     marginTop: 30,
-    width: '60%',
+    // width: '60%',
     alignSelf: 'center',
   },
   containerButtons: {
