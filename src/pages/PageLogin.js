@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Text, View, StatusBar, Image, Alert, AsyncStorage, ScrollView } from 'react-native'
 import { connect } from 'react-redux'
 import login from '../actions/login'
@@ -24,7 +24,8 @@ const PageLogin = ({ navigation, dispatch, user }) => {
         if (!isFormValid()) {
             return Alert.alert("Preencha os campos obrigatórios")
         }
-        doLogin(cpf, password)
+        const cpfConfirmed = cpf.replace(/[^\d]+/g, '')
+        doLogin(cpfConfirmed, password)
             .then((response) => {
                 const user = response.data
                 dispatch(login(user))
@@ -44,6 +45,8 @@ const PageLogin = ({ navigation, dispatch, user }) => {
     const onPressForgot = () => {
         navigation.navigate('PageForgotPassword')
     }
+
+
     return (
         <View style={styles.container}>
             <ScrollView>
@@ -53,18 +56,18 @@ const PageLogin = ({ navigation, dispatch, user }) => {
                         <Image style={styles.logo} source={logo} />
                         <Text style={styles.textLogin}>Login</Text>
                     </View>
-                    <View>
-                    </View>
                     <View style={styles.containerLogin}>
                         <Input
                             label="CPF"
                             placeholder="Insira seu CPF"
                             inputStyle={{ marginLeft: 10, color: "#EAEAEA" }}
+                            keyboardType='numeric'
                             leftIcon={
                                 <Icon
                                     name='user-circle'
                                     size={24}
                                     color='#EAEAEA'
+                                    style={{ marginLeft: 10 }}
                                 />}
                             value={cpf}
                             onChangeText={text => setCpf(text)} />
@@ -75,21 +78,23 @@ const PageLogin = ({ navigation, dispatch, user }) => {
                             inputStyle={{ marginLeft: 10, color: "#EAEAEA" }}
                             value={password}
                             onChangeText={text => setPassword(text)}
+                            keyboardType='default'
                             leftIcon={
                                 <Icon
                                     name='unlock-alt'
                                     size={24}
                                     color='#EAEAEA'
+                                    style={{ marginLeft: 10 }}
                                 />}
                         />
-                            <View style={{ marginTop: '8%' }}>
-                                <SolidButton onPress={onPressLogin} title="Entrar" />
-                            </View>
-                            <View style={styles.containerForgotPassword}>
-                                <ClearButton onPress={onPressForgot} title="Esqueci a senha" />
-                            </View>
+                        <View style={{ marginTop: '8%' }}>
+                            <SolidButton onPress={onPressLogin} title="Entrar" />
+                        </View>
+                        <View style={styles.containerForgotPassword}>
+                            <ClearButton onPress={onPressForgot} title="Esqueci a senha" />
+                        </View>
                     </View>
-                    </View>
+                </View>
             </ScrollView>
         </View>
     )
@@ -97,7 +102,7 @@ const PageLogin = ({ navigation, dispatch, user }) => {
 
 const mapStoreToProps = store => {
     return {
-                user: store.user,
+        user: store.user,
     }
 }
 
