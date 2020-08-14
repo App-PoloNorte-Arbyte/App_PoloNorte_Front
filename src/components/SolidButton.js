@@ -1,10 +1,16 @@
 import React from 'react';
-import { Button } from 'react-native-elements'
-
+import { Button, } from 'react-native-elements'
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const SolidButton = (props) => {
     return (
-        <Button onPress={props.onPress} title={props.title}
+        <Button icon={
+            < Icon
+                name={props.name}
+                size={20}
+                style={{ marginRight: 10 }}
+            />
+        } onPress={props.onPress} title={props.title}
             titleStyle={{ color: '#001435' }}
             containerStyle={{
                 backgroundColor: '#001435',
@@ -19,6 +25,5 @@ const SolidButton = (props) => {
         />
     )
 }
-
 
 export default SolidButton;

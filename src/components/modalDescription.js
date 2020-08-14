@@ -8,13 +8,12 @@ const ModalDescription = ({ visible, validMaintenance }) => {
         visible(false)
     }
     return (
-
         <View style={styles.container}>
             <View style={styles.containerModal}>
                 <Text style={styles.textModal}>Sua descrição está correta?</Text>
                 <View style={styles.viewButton}>
-                    <ClearButtonModal title='Sair' onPress={onPressexit} />
-                    <SolidButtonModal title='Enviar' onPress={() => validMaintenance()} />
+                    <ClearButtonModal title='Sair' onPress={onPressexit} name='reply' />
+                    <SolidButtonModal title='Enviar' onPress={() => validMaintenance()} name='share' />
                 </View>
             </View>
         </View>
@@ -32,7 +31,7 @@ const styles = StyleSheet.create({
         height: '30%',
         width: '80%',
         backgroundColor: '#001435',
-        borderColor: '#E3421F',
+        borderColor: '#EAEAEA',
         borderWidth: 2,
         borderRadius: 10
     },
@@ -41,7 +40,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         fontSize: 18,
         fontWeight: 'bold',
-        color: '#E8FF00',
+        color: '#EAEAEA',
         paddingTop: 10
     },
     viewButton: {

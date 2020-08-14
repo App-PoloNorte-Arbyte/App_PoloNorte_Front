@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, ActivityIndicator } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
-
 import ClearButton from "./ClearButton"
 import SolidButton from "./SolidButton"
-
 
 const ReadScanner = (props) => {
   const [hasPermission, setHasPermission] = useState(null);
@@ -54,7 +52,7 @@ const ReadScanner = (props) => {
         marginTop: 50,
         flexDirection: 'row',
       }}>
-        <ClearButton onPress={props.onPress} title="Sair" />
+        <ClearButton onPress={props.onPress} title="Sair" name='reply' />
         {
           scanned &&
           <SolidButton title={'Scannear Novamente'} onPress={() => setScanned(false)} />}
@@ -76,4 +74,5 @@ const styles = StyleSheet.create({
     fontSize: 28,
   }
 })
+
 export default ReadScanner;
